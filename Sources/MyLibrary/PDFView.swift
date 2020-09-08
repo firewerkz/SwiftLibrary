@@ -13,7 +13,7 @@ import PDFKit
 public struct PDFKitView: View {
     let url: URL
 
-    var body: some View {
+    public var body: some View {
         PDFKitRepresentedView(url)
     }
 }
