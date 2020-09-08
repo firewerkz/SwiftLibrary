@@ -10,7 +10,7 @@
 import SwiftUI
 import PDFKit
 
-struct PDFKitView: View {
+public struct PDFKitView: View {
     let url: URL
 
     var body: some View {
