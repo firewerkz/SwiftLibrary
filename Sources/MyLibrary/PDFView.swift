@@ -11,7 +11,11 @@ import SwiftUI
 import PDFKit
 
 public struct PDFKitView: View {
-    public let url: URL
+    let url: URL
+    
+    public init(url: URL){
+        self.url = url
+    }
 
     public var body: some View {
         PDFKitRepresentedView(url)
