@@ -9,10 +9,10 @@
 // From this https://www.simpleswiftguide.com/how-to-build-linear-progress-bar-in-swiftui/
 import SwiftUI
 
-struct ProgressBar: View {
+public struct ProgressBar: View {
     @Binding var value: Double
     
-    var body: some View {
+    public var body: some View {
         GeometryReader { geometry in
             ZStack(alignment: .leading) {
                 Rectangle().frame(width: geometry.size.width , height: geometry.size.height)

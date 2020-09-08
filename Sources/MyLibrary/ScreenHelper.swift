@@ -38,7 +38,7 @@ struct ScreenPreview<Screen: View>: View {
 }
 
 extension View {
-    func previewAsScreen() -> some View {
+    public func previewAsScreen() -> some View {
         ScreenPreview(screen: self)
     }
 }

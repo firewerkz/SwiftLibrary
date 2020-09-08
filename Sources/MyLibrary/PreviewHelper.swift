@@ -48,7 +48,7 @@ struct ComponentPreview<Component: View>: View {
 }
 
 extension View {
-    func previewAsComponent() -> some View {
+    public func previewAsComponent() -> some View {
         ComponentPreview(component: self)
     }
 }

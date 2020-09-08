@@ -6,7 +6,6 @@
 //  Copyright © 2020 Dick Johnson. All rights reserved.
 //
 
-import Foundation
 import SwiftUI
 import MobileCoreServices
 
@@ -49,10 +48,10 @@ struct FilePickerController: UIViewControllerRepresentable {
     }
 }
 
-struct PickerView: View {
+public struct PickerView: View {
     @Binding var url: URL?
     
-    var body: some View {
+    public var body: some View {
         FilePickerController(url: $url)
     }
 }
@@ -61,7 +60,7 @@ struct PickerView: View {
 struct PickerView_Preview: PreviewProvider {
     static var previews: some View {
         
-        return PickerView(url: .constant(nil))
+        return PickerView(url: .constant(URL(string: "www.apple.com")))
             .aspectRatio(3/2, contentMode: .fit)
     }
 }
