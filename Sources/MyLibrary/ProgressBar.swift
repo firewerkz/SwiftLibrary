@@ -12,6 +12,10 @@ import SwiftUI
 public struct ProgressBar: View {
     @Binding var value: Double
     
+    public init(value: Binding<Double>) {
+        self._value = value
+    }
+    
     public var body: some View {
         GeometryReader { geometry in
             ZStack(alignment: .leading) {

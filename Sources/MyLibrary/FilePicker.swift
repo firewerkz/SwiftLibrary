@@ -51,6 +51,10 @@ struct FilePickerController: UIViewControllerRepresentable {
 public struct PickerView: View {
     @Binding var url: URL?
     
+    public init(url: Binding<URL?>) {
+        self._url = url
+    }
+    
     public var body: some View {
         FilePickerController(url: $url)
     }
