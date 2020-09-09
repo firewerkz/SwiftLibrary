@@ -68,6 +68,10 @@ extension Int {
 
 extension URL: Identifiable {
     public var id: String { return lastPathComponent }
+    
+    var name: String {
+           self.lastPathComponent.stripExtension()
+    }
 }
 
 extension Date {
