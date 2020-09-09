@@ -33,6 +33,13 @@ struct WebView4_Previews: PreviewProvider {
 }
 ````
 
+AdaptiveStack<Content: View>:
+````
+var body: some View {
+AdaptiveStack {
+Form {
+````
+
 .previewAsComponent()
 ````
 struct PickerView_Preview: PreviewProvider {
