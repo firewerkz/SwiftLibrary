@@ -8,27 +8,27 @@
 import SwiftUI
 
 extension Binding {
-    static func mock(_ value: Value) -> Self {
+    public static func mock(_ value: Value) -> Self {
         var value = value
         return Binding(get: { value }, set: { value = $0 })
     }
 }
 
 extension String {
-    func stripExtension(_ extensionSeperator: Character = ".") -> String {
+    public func stripExtension(_ extensionSeperator: Character = ".") -> String {
         let selfReversed = self.reversed()
         guard let extensionPosition = selfReversed.firstIndex(of: extensionSeperator) else {  return self  }
         return String(self[..<self.index(before: (extensionPosition.base.samePosition(in: self)!))])
     }
     
-    func randomString(length: Int) -> String {
+    public func randomString(length: Int) -> String {
       let letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
       return String((0..<length).map{ _ in letters.randomElement()! })
     }
 }
 
 extension Bundle {
-    func getAppVersion() -> String {
+    public func getAppVersion() -> String {
         if let versionNumber = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString"),
         let buildNumber = Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") {
         return "\(versionNumber).\(buildNumber)"
@@ -40,7 +40,7 @@ extension Bundle {
 }
 
 extension Int {
-    func toTimeString() -> String {
+    public func toTimeString() -> String {
         let seconds = self % 60
         let minutes = self/60
         
@@ -59,7 +59,7 @@ extension Int {
     }
     
 // From this https://matteomanferdini.com/model-view-controller-ios/#more-2835
-    var currencyFormat: String {
+    public var currencyFormat: String {
         let formatter = NumberFormatter()
         formatter.numberStyle = .currency
         return formatter.string(from: NSNumber(value: Float(self) )) ?? ""
@@ -69,25 +69,25 @@ extension Int {
 extension URL: Identifiable {
     public var id: String { return lastPathComponent }
     
-    var name: String {
+    public var name: String {
            self.lastPathComponent.stripExtension()
     }
 }
 
 extension Date {
-    func yearString() -> String {
+    public func yearString() -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = DateFormatter.dateFormat(fromTemplate: "yyyy", options: 0, locale: Locale.current)
         return dateFormatter.string(from: self)
     }
     
-    func monthString() -> String {
+    public func monthString() -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = DateFormatter.dateFormat(fromTemplate: "MMMM", options: 0, locale: Locale.current)
         return dateFormatter.string(from: self)
     }
     
-    func shortStringFromDate() -> String {
+    public func shortStringFromDate() -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = DateFormatter.dateFormat(fromTemplate: "ddMMyyyy", options: 0, locale: Locale.current)
         return dateFormatter.string(from: self)
@@ -95,7 +95,7 @@ extension Date {
 }
 
 extension FileManager {
-    func urls(for directory: FileManager.SearchPathDirectory, skipsHiddenFiles: Bool = true ) -> [URL]? {
+    public func urls(for directory: FileManager.SearchPathDirectory, skipsHiddenFiles: Bool = true ) -> [URL]? {
         let documentsURL = urls(for: directory, in: .userDomainMask)[0]
         let fileURLs = try? contentsOfDirectory(at: documentsURL, includingPropertiesForKeys: nil, options: skipsHiddenFiles ? .skipsHiddenFiles : [] )
         return fileURLs
@@ -103,7 +103,7 @@ extension FileManager {
 }
 
 extension View {
-    func Print(_ vars: Any...) -> some View {
+    public func Print(_ vars: Any...) -> some View {
         for v in vars { print(v) }
         return EmptyView()
     }
@@ -111,7 +111,7 @@ extension View {
 
 // Extension to UIImage to rotate imamge if needed to be saved correctly as PNG.
 extension UIImage {
-    func correctlyOrientedImage() -> UIImage {
+    public func correctlyOrientedImage() -> UIImage {
         NSLog("correctlyOrientedImage, image Orientation is \(self.imageOrientation.rawValue)")
         if self.imageOrientation == UIImage.Orientation.up {
             return self
@@ -127,7 +127,7 @@ extension UIImage {
         return normalizedImage
     }
     
-    func saveImage(key: String) {
+    public func saveImage(key: String) {
         let imagetoSave = self.correctlyOrientedImage()
         if let imageData =  imagetoSave.jpegData(compressionQuality: 0.5){
             UserDefaults.standard.set(imageData, forKey: key)
@@ -137,7 +137,7 @@ extension UIImage {
 
 // From this https://swiftwithmajid.com/2020/02/26/textfield-in-swiftui/
 extension NumberFormatter {
-    static var currency: NumberFormatter {
+    public static var currency: NumberFormatter {
         let formatter = NumberFormatter()
         formatter.numberStyle = .currency
         formatter.maximumFractionDigits = 0
