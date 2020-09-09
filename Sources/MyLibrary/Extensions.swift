@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import UIKit
 
 extension Binding {
     public static func mock(_ value: Value) -> Self {
