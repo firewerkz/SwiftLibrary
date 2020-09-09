@@ -44,5 +44,5 @@ struct PickerView_Preview: PreviewProvider {
     }
 }
 ````
-.mock extension
+.mock extension, read/write equivalent of .constant() in previews.
 
