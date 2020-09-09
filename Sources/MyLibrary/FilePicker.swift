@@ -60,12 +60,10 @@ public struct PickerView: View {
     }
 }
 
-#if DEBUG
 struct PickerView_Preview: PreviewProvider {
     static var previews: some View {
-        
         return PickerView(url: .constant(URL(string: "www.apple.com")))
             .aspectRatio(3/2, contentMode: .fit)
+        .previewAsScreen()
     }
 }
-#endif
