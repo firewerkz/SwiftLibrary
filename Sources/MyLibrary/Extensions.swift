@@ -21,10 +21,10 @@ extension String {
         guard let extensionPosition = selfReversed.firstIndex(of: extensionSeperator) else {  return self  }
         return String(self[..<self.index(before: (extensionPosition.base.samePosition(in: self)!))])
     }
-    
+
     public func randomString(length: Int) -> String {
       let letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
-      return String((0..<length).map{ _ in letters.randomElement()! })
+      return String((0..<length).map { _ in letters.randomElement()! })
     }
 }
 
@@ -33,8 +33,7 @@ extension Bundle {
         if let versionNumber = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString"),
         let buildNumber = Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") {
         return "\(versionNumber).\(buildNumber)"
-        }
-        else {
+        } else {
             return "Error reading version"
         }
     }
@@ -44,21 +43,21 @@ extension Int {
     public func toTimeString() -> String {
         let seconds = self % 60
         let minutes = self/60
-        
+
         var secondsString = "\(seconds)"
         var minutesString = "\(minutes)"
-        
+
         if seconds < 10 {
             secondsString = "0" + secondsString
         }
-        
+
         if minutes < 10 {
             minutesString = "0" + minutesString
         }
-        
+
         return "\(minutesString):\(secondsString)"
     }
-    
+
 // From this https://matteomanferdini.com/model-view-controller-ios/#more-2835
     public var currencyFormat: String {
         let formatter = NumberFormatter()
@@ -69,7 +68,7 @@ extension Int {
 
 extension URL: Identifiable {
     public var id: String { return lastPathComponent }
-    
+
     public var name: String {
            self.lastPathComponent.stripExtension()
     }
@@ -81,13 +80,13 @@ extension Date {
         dateFormatter.dateFormat = DateFormatter.dateFormat(fromTemplate: "yyyy", options: 0, locale: Locale.current)
         return dateFormatter.string(from: self)
     }
-    
+
     public func monthString() -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = DateFormatter.dateFormat(fromTemplate: "MMMM", options: 0, locale: Locale.current)
         return dateFormatter.string(from: self)
     }
-    
+
     public func shortStringFromDate() -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = DateFormatter.dateFormat(fromTemplate: "ddMMyyyy", options: 0, locale: Locale.current)
@@ -104,8 +103,8 @@ extension FileManager {
 }
 
 extension View {
-    public func Print(_ vars: Any...) -> some View {
-        for v in vars { print(v) }
+    public func viewPrint(_ vars: Any...) -> some View {
+        for item in vars { print(item) }
         return EmptyView()
     }
 }
@@ -117,20 +116,22 @@ extension UIImage {
         if self.imageOrientation == UIImage.Orientation.up {
             return self
         }
-        
+
         NSLog("correctlyOrientedImage, image needed rotating")
-        
+
         UIGraphicsBeginImageContextWithOptions(self.size, false, self.scale)
         self.draw(in: CGRect(origin: CGPoint(x: 0, y: 0), size: CGSize( width: self.size.width, height: self.size.height)))
-        let normalizedImage: UIImage = UIGraphicsGetImageFromCurrentImageContext()!
-        UIGraphicsEndImageContext()
-        
-        return normalizedImage
+        if let normalizedImage: UIImage = UIGraphicsGetImageFromCurrentImageContext() {
+            UIGraphicsEndImageContext()
+            return normalizedImage
+        } else {
+            return self
+        }
     }
-    
+
     public func saveImage(key: String) {
         let imagetoSave = self.correctlyOrientedImage()
-        if let imageData =  imagetoSave.jpegData(compressionQuality: 0.5){
+        if let imageData =  imagetoSave.jpegData(compressionQuality: 0.5) {
             UserDefaults.standard.set(imageData, forKey: key)
         }
     }
@@ -145,5 +146,3 @@ extension NumberFormatter {
         return formatter
     }
 }
-
-

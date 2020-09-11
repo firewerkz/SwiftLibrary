@@ -12,8 +12,8 @@ import PDFKit
 
 public struct PDFKitView: View {
     let url: URL
-    
-    public init(url: URL){
+
+    public init(url: URL) {
         self.url = url
     }
 
@@ -46,4 +46,3 @@ struct PDFKitRepresentedView: UIViewRepresentable {
     func updateUIView(_ uiView: UIView, context: UIViewRepresentableContext<PDFKitRepresentedView>) {
     }
 }
-

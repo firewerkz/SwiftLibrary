@@ -13,7 +13,7 @@ import WebKit
 struct WebView4: UIViewRepresentable {
     @Binding var title: String
     var url: URL
-    var loadStatusChanged: ((Bool, Error?) -> Void)? = nil
+    var loadStatusChanged: ((Bool, Error?) -> Void)?
 
     func makeCoordinator() -> WebView4.Coordinator {
         Coordinator(self)
@@ -62,8 +62,8 @@ struct WebView4: UIViewRepresentable {
 public struct Display: View {
     let site: String
     @State var title: String = ""
-    @State var error: Error? = nil
-    
+    @State var error: Error?
+
     public init(site: String) {
         self.site = site
     }
@@ -76,21 +76,19 @@ public struct Display: View {
                     if loading {
                         print("Loading started")
                         self.title = "Loading…"
-                    }
-                    else {
+                    } else {
                         print("Done loading.")
                         if let error = error {
                             self.error = error
                             if self.title.isEmpty {
                                 self.title = "Error"
                             }
-                        }
-                        else if self.title.isEmpty {
+                        } else if self.title.isEmpty {
                             self.title = "Some Place"
                         }
                     }
             }
-            .navigationBarTitle(Text(title),displayMode: .inline)
+            .navigationBarTitle(Text(title), displayMode: .inline)
         }
     }
 }

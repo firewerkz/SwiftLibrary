@@ -11,18 +11,18 @@ import SwiftUI
 
 public struct ProgressBar: View {
     @Binding var value: Double
-    
+
     public init(value: Binding<Double>) {
         self._value = value
     }
-    
+
     public var body: some View {
         GeometryReader { geometry in
             ZStack(alignment: .leading) {
-                Rectangle().frame(width: geometry.size.width , height: geometry.size.height)
+                Rectangle().frame(width: geometry.size.width, height: geometry.size.height)
                     .opacity(0.3)
                     .foregroundColor(Color(UIColor.systemTeal))
-                
+
                 Rectangle().frame(width: min(CGFloat(self.value)*geometry.size.width, geometry.size.width), height: geometry.size.height)
                     .foregroundColor(Color(UIColor.systemBlue))
                     .animation(.linear)
@@ -32,35 +32,35 @@ public struct ProgressBar: View {
 }
 struct ProgressBarDemo: View {
     @State var progressValue: Double = 0.0
-    
+
     var body: some View {
         VStack {
             ProgressBar(value: $progressValue).frame(height: 20)
-            
+
             Button(action: {
                 self.startProgressBar()
-            }) {
+            }, label: {
                 Text("Start Progress")
-            }.padding()
-            
+            }).padding()
+
             Button(action: {
                 self.resetProgressBar()
-            }) {
+            }, label: {
                 Text("Reset")
-            }
-            
+            })
+
             Text("\(progressValue*10, specifier: "%.2f")%")
-            
+
             Spacer()
         }.padding()
     }
-    
+
     func startProgressBar() {
         for _ in 0...80 {
             self.progressValue += 0.015
         }
     }
-    
+
     func resetProgressBar() {
         self.progressValue = 0.0
     }
