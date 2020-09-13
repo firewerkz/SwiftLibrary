@@ -1,5 +1,24 @@
 # MyLibrary
 
+OptionalView + fallbackView
+https://medium.com/@garsdle/unwrapping-optionals-in-swiftui-7563dcc200e7
+https://gist.github.com/garsdle/dc28560f51668e6ffb74c27478ac9339#file-optionalview-swift
+```swift
+OptionalView(property.coordinates) { coordinates in
+    MapView(title: self.property.name, coordinate: coordinates)
+    .frame(height: 300)
+}
+.fallbackView {
+    HStack {
+        Spacer()
+        Image(systemName: "mappin.circle")
+            .imageScale(.large)
+            .frame(height: 300)
+        Spacer()
+    }
+}
+```
+
 ImagePicker 
 ```swift
 struct ImagePicker_Previews: PreviewProvider {
