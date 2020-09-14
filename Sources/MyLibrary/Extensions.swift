@@ -26,6 +26,11 @@ extension String {
       let letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
       return String((0..<length).map { _ in letters.randomElement()! })
     }
+
+    public func createDatabaseKey() -> String {
+        let validChars = Set("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890-_")
+        return String(self.filter { validChars.contains($0) }).lowercased()
+    }
 }
 
 extension Bundle {
