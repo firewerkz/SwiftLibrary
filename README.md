@@ -18,7 +18,14 @@ OptionalView(property.coordinates) { coordinates in
     }
 }
 ```
-
+MapView (for iOS13 SwiftUI)
+```swift
+struct MapView_Previews: PreviewProvider {
+    static var previews: some View {
+        MapView(title: "Test", coordinate: CLLocationCoordinate2D(latitude: 50.6047859, longitude: -2.4686725))
+    }
+}
+```
 ImagePicker 
 ```swift
 struct ImagePicker_Previews: PreviewProvider {
