@@ -97,6 +97,11 @@ extension Date {
         dateFormatter.dateFormat = DateFormatter.dateFormat(fromTemplate: "ddMMyyyy", options: 0, locale: Locale.current)
         return dateFormatter.string(from: self)
     }
+
+    public func startofDay() -> Date {
+        let calendar = Calendar.current
+        return calendar.startOfDay(for: self)
+    }
 }
 
 extension FileManager {
