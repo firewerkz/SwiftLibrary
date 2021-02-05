@@ -77,7 +77,7 @@ extension URL: Identifiable {
     // Need to deal with iCloud Drive files that are not downloaded and have an extension of .icloud
     // also may have to deal with preceedin .
     public var name: String {
-        if self.pathExtension == ".icloud" {
+        if self.pathExtension == "icloud" {
             return self.lastPathComponent.stripExtension().stripExtension()
         } else {
            return self.lastPathComponent.stripExtension()
