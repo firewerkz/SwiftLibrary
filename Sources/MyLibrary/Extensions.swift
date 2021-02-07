@@ -75,10 +75,16 @@ extension URL: Identifiable {
     public var id: String { return lastPathComponent }
 
     // Need to deal with iCloud Drive files that are not downloaded and have an extension of .icloud
-    // also may have to deal with preceedin .
+    // also may have to deal with preceedin . from hidden files, like iCloud .icloud ones.
+    // https://stackoverflow.com/questions/61109063/get-the-names-of-files-in-an-icloud-drive-folder-that-havent-been-downloaded-ye
+    //
     public var name: String {
         if self.pathExtension == "icloud" {
-            return self.lastPathComponent.stripExtension().stripExtension()
+            if self.pathExtension.hasPrefix(".") {
+                return String(self.lastPathComponent.stripExtension().stripExtension().dropFirst())
+            } else {
+                return self.lastPathComponent.stripExtension().stripExtension()
+            }
         } else {
            return self.lastPathComponent.stripExtension()
         }
