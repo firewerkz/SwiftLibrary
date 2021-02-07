@@ -80,7 +80,7 @@ extension URL: Identifiable {
     //
     public var name: String {
         if self.pathExtension == "icloud" {
-            if self.pathExtension.hasPrefix(".") {
+            if self.lastPathComponent.hasPrefix(".") {
                 return String(self.lastPathComponent.stripExtension().stripExtension().dropFirst())
             } else {
                 return self.lastPathComponent.stripExtension().stripExtension()
