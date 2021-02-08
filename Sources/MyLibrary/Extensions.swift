@@ -89,6 +89,14 @@ extension URL: Identifiable {
            return self.lastPathComponent.stripExtension()
         }
     }
+
+    public var hidden: Bool {
+        return self.lastPathComponent.hasPrefix(".")
+    }
+
+    public var notiCloudDownloaded: Bool {
+        return self.pathExtension == "icloud"
+    }
 }
 
 extension Date {
