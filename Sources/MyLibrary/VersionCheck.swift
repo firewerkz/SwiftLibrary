@@ -27,7 +27,7 @@ class AppInfo: Decodable {
 
 public class CheckUpdate: NSObject {
 
-    static let shared = CheckUpdate()
+    public static let shared = CheckUpdate()
 
     public func showUpdate(withConfirmation: Bool) {
         DispatchQueue.global().async {
