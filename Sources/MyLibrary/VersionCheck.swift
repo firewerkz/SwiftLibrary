@@ -1,67 +1,5 @@
 //
 //  VersionCheck.swift
-//  TimetoGo2
-//
-//  Created by Dick Johnson on 27/01/2021.
-//  Copyright © 2021 Dick Johnson. All rights reserved.
-//
-/*
-import Foundation
-
-class LookupResult: Decodable {
-    var results: [AppInfo]
-}
-
-class AppInfo: Decodable {
-    var version: String
-}
-
-func getAppInfo(completion: @escaping (AppInfo?, Error?) -> Void) -> URLSessionDataTask? {
-    guard let identifier = Bundle.main.infoDictionary?["CFBundleIdentifier"] as? String,
-          let url = URL(string: "http://itunes.apple.com/lookup?bundleId=\(identifier)") else {
-            DispatchQueue.main.async {
-                completion(nil, VersionError.invalidBundleInfo)
-            }
-            return nil
-    }
-    let task = URLSession.shared.dataTask(with: url) { (data, _, error) in
-        do {
-            if let error = error { throw error }
-            guard let data = data else { throw VersionError.invalidResponse }
-            let result = try JSONDecoder().decode(LookupResult.self, from: data)
-            guard let info = result.results.first else { throw VersionError.invalidResponse }
-
-            completion(info, nil)
-        } catch {
-            completion(nil, error)
-        }
-    }
-    task.resume()
-    return task
-}
-
-enum VersionError: Error {
-    case invalidBundleInfo, invalidResponse
-}
-
-func checkVersion() {
-    let info = Bundle.main.infoDictionary
-    let currentVersion = info?["CFBundleShortVersionString"] as? String
-    _ = getAppInfo { info, error in
-        if let error = error {
-            print(error)
-        } else if info?.version == currentVersion {
-            print("App is up to date with the App Store")
-        } else {
-            if let currentVersion = currentVersion, let appstoreVersion = info?.version {
-                print("A newer version of this app, \(appstoreVersion), is available on the App Store.\nThe current app version is \(currentVersion)")
-            } else {
-                print("A newer version of this app is available on the App Store")
-            }
-        }
-    }
-}
-*/
 
 // from here https://github.com/acarolsf/checkVersion-iOS
 //
@@ -87,11 +25,11 @@ class AppInfo: Decodable {
     var trackViewUrl: String
 }
 
-class CheckUpdate: NSObject {
+public class CheckUpdate: NSObject {
 
     static let shared = CheckUpdate()
 
-    func showUpdate(withConfirmation: Bool) {
+    public func showUpdate(withConfirmation: Bool) {
         DispatchQueue.global().async {
             self.checkVersion(force: !withConfirmation)
         }
