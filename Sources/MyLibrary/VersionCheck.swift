@@ -61,7 +61,7 @@ public class CheckUpdate: NSObject {
     private func getAppInfo(completion: @escaping (AppInfo?, Error?) -> Void) -> URLSessionDataTask? {
 
         guard let identifier = self.getBundle(key: "CFBundleIdentifier"),
-              let url = URL(string: "http://itunes.apple.com/lookup?bundleId=\(identifier)") else {
+              let url = URL(string: "https://itunes.apple.com/us/lookup?bundleId=\(identifier)") else {
                 DispatchQueue.main.async {
                     completion(nil, VersionError.invalidBundleInfo)
                 }
