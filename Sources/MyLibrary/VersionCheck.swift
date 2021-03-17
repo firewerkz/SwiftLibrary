@@ -41,9 +41,9 @@ public class CheckUpdate: NSObject {
                 if let appStoreAppVersion = info?.version {
                     if let error = error {
                         print("error getting app store version: ", error)
-                    } else if appStoreAppVersion == currentVersion {
-                        print("Already on the last app version: ", currentVersion)
-                    } else {
+                    } else if self.compareNumeric(currentVersion, appStoreAppVersion) == .orderedSame {
+                        print("Already on the lastest app store version: ", appStoreAppVersion)
+                    } else if self.compareNumeric(currentVersion, appStoreAppVersion) == .orderedAscending {
                         print("Needs update: AppStore Version: \(appStoreAppVersion) > Current version: ", currentVersion)
                         print("appURL \(String(describing: info?.trackViewUrl))")
                         DispatchQueue.main.async {
@@ -52,16 +52,22 @@ public class CheckUpdate: NSObject {
                                 topController.showAppUpdateAlert(version: appStoreAppVersion, force: force, appURL: trackViewUrl)
                             }
                         }
+                    } else {
+                        print("App is newer: AppStore Version: \(appStoreAppVersion) > Current version: ", currentVersion)
                     }
                 }
             }
         }
     }
 
+    private func compareNumeric(_ version1: String, _ version2: String) -> ComparisonResult {
+        return version1.compare(version2, options: .numeric)
+      }
+
     private func getAppInfo(completion: @escaping (AppInfo?, Error?) -> Void) -> URLSessionDataTask? {
 
         guard let identifier = self.getBundle(key: "CFBundleIdentifier"),
-              let url = URL(string: "https://itunes.apple.com/us/lookup?bundleId=\(identifier)") else {
+              let url = URL(string: "https://itunes.apple.com/gb/lookup?bundleId=\(identifier)") else {
                 DispatchQueue.main.async {
                     completion(nil, VersionError.invalidBundleInfo)
                 }
