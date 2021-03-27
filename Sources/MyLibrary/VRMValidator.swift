@@ -10,7 +10,10 @@ import Foundation
 public class VRMValidator {
 
     static let vrmRegExArray = [
-        "(?<Current>^[A-Z]{2}[0-9]{2}[A-Z]{3}$)",
+        // Original way
+        //"(?<Current>^[A-Z]{2}[0-9]{2}[A-Z]{3}$)",
+        // Something more like
+        "(?<Current>^[A-HK-PRSVWY][A-HJ-PR-Y]([0][2-9]|[1-9][0-9])[A-HJ-PR-Z]{3}$)",
         "(?<Prefix>^[A-Z][0-9]{1,3}[A-Z]{3}$)",
         "(?<Suffix>^[A-Z]{3}[0-9]{1,3}[A-Z]$)",
         "(?<DatelessLongNumberPrefix>^[0-9]{1,4}[A-Z]{1,2}$)",
