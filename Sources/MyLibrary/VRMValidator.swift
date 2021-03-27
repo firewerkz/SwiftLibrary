@@ -41,3 +41,9 @@ public class VRMValidator {
         return matched
     }
 }
+
+extension String {
+    func removingWhitespaces() -> String {
+        return components(separatedBy: .whitespaces).joined()
+    }
+}
