@@ -122,6 +122,14 @@ extension Date {
         let calendar = Calendar.current
         return calendar.startOfDay(for: self)
     }
+
+    extension Date {
+        func uidFromDateTime() -> String {
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss Z"
+            return dateFormatter.string(from: self)
+        }
+    }
 }
 
 extension FileManager {
