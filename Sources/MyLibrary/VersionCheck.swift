@@ -99,13 +99,15 @@ public class CheckUpdate: NSObject {
     func getBundle(key: String) -> String? {
 
         guard let filePath = Bundle.main.path(forResource: "Info", ofType: "plist") else {
-          fatalError("Couldn't find file 'Info.plist'.")
+            //fatalError("Couldn't find file 'Info.plist'.")
+            return nil
         }
         // 2 - Add the file to a dictionary
         let plist = NSDictionary(contentsOfFile: filePath)
         // Check if the variable on plist exists
         guard let value = plist?.object(forKey: key) as? String else {
-          fatalError("Couldn't find key '\(key)' in 'Info.plist'.")
+            //fatalError("Couldn't find key '\(key)' in 'Info.plist'.")
+            return nil
         }
         return value
     }
