@@ -8,6 +8,9 @@
 
 import SwiftUI
 
+#if os(macOS)
+#else
+@available(iOS 14, *)
 struct ScreenPreview<Screen: View>: View {
     var screen: Screen
 
@@ -37,8 +40,10 @@ struct ScreenPreview<Screen: View>: View {
     }
 }
 
+@available(iOS 14, *)
 extension View {
     public func previewAsScreen() -> some View {
         ScreenPreview(screen: self)
     }
 }
+#endif

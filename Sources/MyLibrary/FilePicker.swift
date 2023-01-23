@@ -7,6 +7,8 @@
 //
 
 import SwiftUI
+#if os(macOS)
+#else
 import MobileCoreServices
 
 struct FilePickerController: UIViewControllerRepresentable {
@@ -60,6 +62,7 @@ public struct PickerView: View {
     }
 }
 
+@available(iOS 14, *)
 struct PickerViewPreview: PreviewProvider {
     static var previews: some View {
         return PickerView(url: .constant(URL(string: "www.apple.com")))
@@ -67,3 +70,4 @@ struct PickerViewPreview: PreviewProvider {
         .previewAsScreen()
     }
 }
+#endif

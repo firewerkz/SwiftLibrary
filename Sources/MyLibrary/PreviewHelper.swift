@@ -8,12 +8,14 @@
 
 import SwiftUI
 
+@available(macOS 10.15, *)
 extension ColorScheme {
     var previewName: String {
         String(describing: self).capitalized
     }
 }
 
+@available(macOS 10.15, *)
 extension ContentSizeCategory {
     static let smallestAndLargest = [allCases.first!, allCases.last!]
 
@@ -22,12 +24,14 @@ extension ContentSizeCategory {
     }
 }
 
+@available(macOS 10.15, *)
 extension ForEach where Data.Element: Hashable, ID == Data.Element, Content: View {
     init(values: Data, content: @escaping (Data.Element) -> Content) {
         self.init(values, id: \.self, content: content)
     }
 }
 
+@available(macOS 10.15, *)
 struct ComponentPreview<Component: View>: View {
     var component: Component
 
@@ -36,7 +40,9 @@ struct ComponentPreview<Component: View>: View {
             ForEach(values: ContentSizeCategory.smallestAndLargest) { category in
                 self.component
                     .previewLayout(.sizeThatFits)
+                    #if !os(macOS)
                     .background(Color(UIColor.systemBackground))
+                    #endif
                     .colorScheme(scheme)
                     .environment(\.sizeCategory, category)
                     .previewDisplayName(
@@ -47,6 +53,7 @@ struct ComponentPreview<Component: View>: View {
     }
 }
 
+@available(macOS 10.15, *)
 extension View {
     public func previewAsComponent() -> some View {
         ComponentPreview(component: self)

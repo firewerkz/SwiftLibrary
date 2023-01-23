@@ -11,7 +11,8 @@
 //
 
 import SwiftUI
-
+#if os(macOS)
+#else
 public struct ImagePicker: UIViewControllerRepresentable {
     @Environment(\.presentationMode) var presentationMode
     @Binding var image: UIImage?
@@ -56,3 +57,4 @@ struct ImagePicker_Previews: PreviewProvider {
         ImagePicker(image: .mock(nil))
     }
 }
+#endif

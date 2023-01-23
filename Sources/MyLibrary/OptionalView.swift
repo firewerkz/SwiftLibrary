@@ -9,6 +9,7 @@
 
 import SwiftUI
 
+@available(macOS 10.15, *)
 public struct OptionalView<Value, Content>: View where Content: View {
     var content: (Value) -> Content
     var value: Value
@@ -26,6 +27,7 @@ public struct OptionalView<Value, Content>: View where Content: View {
     }
 }
 
+@available(macOS 10.15, *)
 extension Optional where Wrapped: View {
     public func fallbackView<T: View>(_ transform: () -> T) -> AnyView? {
         switch self {

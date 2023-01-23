@@ -9,7 +9,8 @@
 
 import SwiftUI
 import WebKit
-
+#if os(macOS)
+#else
 struct WebView4: UIViewRepresentable {
     @Binding var title: String
     var url: URL
@@ -100,3 +101,4 @@ struct WebView4_Previews: PreviewProvider {
         }
     }
 }
+#endif

@@ -9,6 +9,8 @@
 
 import SwiftUI
 
+@available(macOS 10.15, *)
+@available(iOS 14, *)
 public struct AdaptiveStack<Content: View>: View {
     @Environment(\.horizontalSizeClass) var sizeClass
     let horizontalAlignment: HorizontalAlignment
@@ -33,3 +35,29 @@ public struct AdaptiveStack<Content: View>: View {
         }
     }
 }
+
+#if os(macOS)
+enum UserInterfaceSizeClass {
+    case compact
+    case regular
+}
+
+struct HorizontalSizeClassEnvironmentKey: EnvironmentKey {
+    static let defaultValue: UserInterfaceSizeClass = .regular
+}
+struct VerticalSizeClassEnvironmentKey: EnvironmentKey {
+    static let defaultValue: UserInterfaceSizeClass = .regular
+}
+
+@available(macOS 10.15, *)
+extension EnvironmentValues {
+    var horizontalSizeClass: UserInterfaceSizeClass {
+        get { return self[HorizontalSizeClassEnvironmentKey.self] }
+        set { self[HorizontalSizeClassEnvironmentKey.self] = newValue }
+    }
+    var verticalSizeClass: UserInterfaceSizeClass {
+        get { return self[VerticalSizeClassEnvironmentKey.self] }
+        set { self[VerticalSizeClassEnvironmentKey.self] = newValue }
+    }
+}
+#endif

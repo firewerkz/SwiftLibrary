@@ -10,6 +10,8 @@
 import SwiftUI
 import PDFKit
 
+#if os(macOS)
+#else
 public struct PDFKitView: View {
     let url: URL
 
@@ -46,3 +48,4 @@ struct PDFKitRepresentedView: UIViewRepresentable {
     func updateUIView(_ uiView: UIView, context: UIViewRepresentableContext<PDFKitRepresentedView>) {
     }
 }
+#endif

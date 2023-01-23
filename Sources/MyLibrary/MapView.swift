@@ -9,6 +9,8 @@
 import SwiftUI
 import MapKit
 
+#if os(macOS)
+#else
 public struct MapView: UIViewRepresentable {
     var title: String
     var coordinate: CLLocationCoordinate2D
@@ -46,3 +48,4 @@ final class Checkpoint: NSObject, MKAnnotation {
     self.coordinate = coordinate
   }
 }
+#endif

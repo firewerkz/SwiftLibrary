@@ -6,8 +6,12 @@
 //
 
 import SwiftUI
+#if os(macOS)
+#else
 import UIKit
+#endif
 
+@available(macOS 10.15, *)
 extension Binding {
     public static func mock(_ value: Value) -> Self {
         var value = value
@@ -138,6 +142,7 @@ extension FileManager {
     }
 }
 
+@available(macOS 10.15, *)
 extension View {
     public func viewPrint(_ vars: Any...) -> some View {
         for item in vars { print(item) }
@@ -145,6 +150,7 @@ extension View {
     }
 }
 
+#if !os(macOS)
 // Extension to UIImage to rotate imamge if needed to be saved correctly as PNG.
 extension UIImage {
     public func correctlyOrientedImage() -> UIImage {
@@ -172,6 +178,7 @@ extension UIImage {
         }
     }
 }
+#endif
 
 // From this https://swiftwithmajid.com/2020/02/26/textfield-in-swiftui/
 extension NumberFormatter {

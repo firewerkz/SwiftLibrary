@@ -9,9 +9,10 @@
 //  Created by Ana Carolina on 13/11/20.
 //  Copyright © 2020 acarolsf. All rights reserved.
 //
-import Foundation
-import UIKit
+import SwiftUI
 
+#if os(macOS)
+#else
 enum VersionError: Error {
     case invalidBundleInfo, invalidResponse
 }
@@ -141,3 +142,4 @@ extension UIViewController {
         self.present(alertController, animated: true, completion: nil)
     }
 }
+#endif
